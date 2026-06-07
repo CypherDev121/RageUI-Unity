@@ -1,0 +1,708 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&display=swap');
+
+/* ============================================================
+   RageUI — Red Accent Premium Design
+   Inspired by the provided layout: Dark semi-transparent,
+   thick red highlight accents, card-style items, and custom arrow buttons.
+   ============================================================ */
+
+:root {
+  --bg-menu: rgba(10, 10, 10, 0.65);
+  --bg-item: rgba(18, 18, 18, 0.45);
+  --bg-item-hover: rgba(26, 26, 26, 0.8);
+  --bg-item-selected: rgba(30, 30, 30, 0.75);
+  
+  --accent: #ff2a2a;
+  --accent-glow: rgba(255, 42, 42, 0.3);
+  
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #9c9c9c;
+  
+  --border: rgba(255, 255, 255, 0.05);
+  --radius: 8px;
+  --radius-sm: 4px;
+  --font: 'Outfit', sans-serif;
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+  box-sizing: border-box; 
+}
+
+body {
+  font-family: var(--font);
+  background: transparent;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidden { 
+  display: none !important; 
+}
+
+/* ===== MENU CONTAINER ===== */
+#rageui-menu {
+  position: absolute;
+  top: 40px;
+  left: 40px;
+  width: 430px;
+  background: var(--bg-menu);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+/* ===== HEADER ===== */
+#menu-header {
+  padding: 24px 18px;
+  background: linear-gradient(180deg, rgba(18, 18, 18, 0.98) 0%, rgba(10, 10, 10, 0.98) 100%);
+  border-bottom: 2px solid rgba(255, 42, 42, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+#menu-title {
+  font-size: 21px;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-align: center;
+  position: relative;
+  display: inline-block;
+  z-index: 2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
+}
+
+#menu-title::after {
+  content: '';
+  position: absolute;
+  left: -4px;
+  bottom: 2px;
+  width: calc(100% + 8px);
+  height: 7px;
+  background-color: var(--accent);
+  z-index: -1;
+}
+
+/* ===== SUBTITLE ===== */
+#menu-subtitle {
+  padding: 10px 18px;
+  background: rgba(8, 8, 8, 0.95);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#menu-subtitle-text {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+#menu-subtitle-count {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ===== ITEMS LIST ===== */
+#menu-items {
+  max-height: 380px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 12px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Card-style gap between items */
+}
+
+#menu-items::-webkit-scrollbar { 
+  width: 4px; 
+}
+#menu-items::-webkit-scrollbar-track { 
+  background: transparent; 
+}
+#menu-items::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+}
+#menu-items::-webkit-scrollbar-thumb:hover { 
+  background: var(--accent); 
+}
+
+/* ===== ITEM CONTAINER ===== */
+.menu-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 44px;
+  padding: 8px 14px;
+  background: var(--bg-item);
+  border: 2px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 12px;
+  overflow: hidden;
+}
+
+/* Background Progress Bar for Sliders/Progress */
+.menu-item-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.05);
+  z-index: 0;
+  transition: width 0.1s ease;
+}
+
+.menu-item.selected .menu-item-progress {
+  background: rgba(255, 42, 42, 0.15); /* light red accent */
+}
+
+/* Ensure text is above the background bar */
+.menu-item-icon, .menu-item-label, .menu-item-right, .menu-item-right-container, .menu-checkbox {
+  position: relative;
+  z-index: 1;
+}
+
+.menu-item:hover { 
+  background: var(--bg-item-hover); 
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.menu-item.selected {
+  background: var(--bg-item-selected);
+  border-color: var(--accent); /* Thick red border */
+}
+
+/* Item Icons */
+.menu-item-icon {
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  transition: all 0.15s ease;
+}
+
+.menu-item.selected .menu-item-icon {
+  color: var(--accent); /* Accent color icon when selected */
+  transform: scale(1.1);
+}
+
+/* Item Labels */
+.menu-item-label {
+  flex: 1;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color 0.15s ease;
+}
+
+.menu-item.selected .menu-item-label { 
+  color: var(--text-primary); 
+}
+
+/* Right content layouts */
+.menu-item-right-container {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-left: auto;
+}
+
+.menu-item-right-label {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.menu-item.selected .menu-item-right-label {
+  color: var(--text-secondary);
+}
+
+/* Square Arrow Box */
+.menu-item-arrow-box {
+  width: 26px;
+  height: 26px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  font-size: 10px;
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.menu-item.selected .menu-item-arrow-box {
+  background: var(--accent); /* Red background when selected */
+  border-color: var(--accent);
+}
+
+/* Standard plain right text (for lists, sliders, progress) */
+.menu-item-right {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.menu-item.selected .menu-item-right {
+  color: var(--accent-light);
+}
+
+.menu-item.disabled {
+  opacity: 0.25;
+  cursor: default;
+  pointer-events: none;
+}
+
+/* ===== SEPARATORS & HEADERS ===== */
+.menu-item.separator {
+  min-height: auto;
+  padding: 12px 14px 4px;
+  background: transparent;
+  border: none;
+  cursor: default;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.menu-item.separator:hover {
+  background: transparent;
+}
+
+.menu-item.separator::before {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-item.separator .menu-item-label {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.menu-item.separator::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-item.header {
+  background: rgba(255, 42, 42, 0.06);
+  border-left: 3px solid var(--accent);
+  cursor: default;
+  min-height: 38px;
+}
+
+.menu-item.header:hover {
+  background: rgba(255, 42, 42, 0.06);
+}
+
+.menu-item.header .menu-item-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+}
+
+/* ===== CHECKBOX (NativeUI Style) ===== */
+.menu-checkbox {
+  width: 26px;
+  height: 26px;
+  border: 2px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-sm);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+  margin-left: auto;
+  background: rgba(255, 255, 255, 0.04);
+  position: relative;
+  order: 99; /* Push to the right */
+}
+
+.menu-checkbox::after {
+  content: '\f00d'; /* FontAwesome X (cross) */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+.menu-item.selected .menu-checkbox {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.menu-item.selected .menu-checkbox::after {
+  color: rgba(255, 255, 255, 0.35);
+}
+
+/* Checked state */
+.menu-checkbox.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 8px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+.menu-checkbox.checked::after {
+  content: '\f00c'; /* FontAwesome checkmark */
+  font-family: 'Font Awesome 6 Free';
+  font-weight: 900;
+  font-size: 13px;
+  color: #ffffff;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.menu-item.selected .menu-checkbox.checked {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px var(--accent-glow), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+.menu-item.selected .menu-checkbox.checked::after {
+  color: #ffffff;
+}
+
+/* ===== DESCRIPTION BOX ===== */
+#menu-description {
+  padding: 14px 18px;
+  background: rgba(8, 8, 8, 0.98);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  min-height: 48px;
+  position: relative;
+  flex-shrink: 0;
+}
+
+#menu-desc-bar {
+  width: 3px;
+  height: calc(100% - 28px);
+  background: var(--accent);
+  border-radius: 2px;
+  position: absolute;
+  left: 10px;
+  top: 14px;
+}
+
+#menu-desc-text {
+  font-size: 12px;
+  line-height: 1.4;
+  color: var(--text-secondary);
+  display: block;
+  padding-left: 12px;
+}
+
+/* ===== NOTIFICATIONS ===== */
+#rageui-notifications {
+  position: absolute;
+  right: 40px;
+  top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+.notification {
+  background: rgba(15, 15, 15, 0.9);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius-sm);
+  padding: 12px 16px;
+  min-width: 250px;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(8px);
+  animation: notifIn 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  color: var(--text-secondary);
+}
+
+@keyframes notifIn {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.n-title {
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+}
+
+.n-text {
+  font-size: 12px;
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Caveat:wght@700&display=swap');
+
+/* =========================================
+   ID CARD UI SYSTEM
+   ========================================= */
+
+#rageui-idcard-container {
+    position: absolute;
+    top: 50px;
+    left: 50%;
+    width: 420px;
+    height: 250px;
+    transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+    opacity: 1;
+    transform: translate(-50%, 0);
+    z-index: 1000;
+}
+
+#rageui-idcard-container.hidden {
+    opacity: 0;
+    transform: translate(-50%, -50px) scale(0.95);
+    pointer-events: none;
+}
+
+.idcard {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    background: rgba(20, 24, 30, 0.85);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 16px;
+    box-shadow: none;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    color: #fff;
+    font-family: 'Inter', sans-serif;
+}
+
+/* Background overlay texture */
+.idcard::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(230, 48, 48, 0.1) 0%, transparent 60%);
+    opacity: 0.8;
+    pointer-events: none;
+}
+
+/* Header */
+.idcard-header {
+    display: flex;
+    align-items: center;
+    padding: 12px 18px;
+    background: linear-gradient(90deg, rgba(230, 48, 48, 0.3) 0%, rgba(20, 24, 30, 0) 100%);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.idcard-logo {
+    width: 34px;
+    height: 34px;
+    background: #e63030;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    color: #fff;
+    box-shadow: 0 4px 10px rgba(230, 48, 48, 0.4);
+    margin-right: 14px;
+}
+
+.idcard-title h2 {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    color: #fff;
+}
+
+.idcard-title h3 {
+    margin: 2px 0 0 0;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    color: #e63030;
+    text-transform: uppercase;
+}
+
+/* Body */
+.idcard-body {
+    display: flex;
+    flex: 1;
+    padding: 18px;
+    gap: 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.idcard-photo {
+    width: 90px;
+    height: 110px;
+    background: rgba(0, 0, 0, 0.3);
+    border: 2px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 40px;
+    color: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
+    flex-shrink: 0;
+}
+
+.idcard-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.detail-row {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-row.split {
+    flex-direction: row;
+    gap: 20px;
+}
+
+.split-col {
+    display: flex;
+    flex-direction: column;
+}
+
+.detail-label {
+    font-size: 9px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.4);
+    margin-bottom: 2px;
+    letter-spacing: 1px;
+}
+
+.detail-value {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+    text-transform: uppercase;
+}
+
+/* Footer & Signature */
+.idcard-footer {
+    padding: 10px 18px 15px 18px;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+    z-index: 1;
+}
+
+.idcard-signature {
+    font-family: 'Caveat', cursive;
+    font-size: 24px;
+    color: rgba(255, 255, 255, 0.8);
+    transform: rotate(-3deg);
+    text-shadow: 0 0 10px rgba(255,255,255,0.2);
+}
+
+/* =========================================
+   INFORMATION PANEL UI SYSTEM
+   ========================================= */
+
+#rageui-information {
+    position: absolute;
+    top: 40px;
+    left: 480px; /* Right next to the main menu (430px width + 10px spacing + left margin) */
+    width: 250px;
+    background: rgba(10, 10, 10, 0.75);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#info-header {
+    padding: 12px 14px;
+    background: rgba(255, 255, 255, 0.03);
+    border-bottom: 2px solid rgba(255, 42, 42, 0.4);
+    font-size: 14px;
+    font-weight: 800;
+    color: var(--text-primary);
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+    letter-spacing: 0.05em;
+}
+
+#info-items {
+    padding: 10px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.info-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 12px;
+}
+
+.info-label {
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.info-value {
+    font-weight: 700;
+    color: var(--text-primary);
+    text-align: right;
+    max-width: 60%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

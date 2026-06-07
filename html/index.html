@@ -1,0 +1,82 @@
+<!-- Cache bust 1 -->
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RageUI — Red Accent Theme</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="rageui-menu" class="hidden">
+        <div id="menu-header">
+            <span id="menu-title"></span>
+        </div>
+        <div id="menu-subtitle">
+            <span id="menu-subtitle-text"></span>
+            <span id="menu-subtitle-count"></span>
+        </div>
+        <div id="menu-items"></div>
+        <div id="menu-description" class="hidden">
+            <div id="menu-desc-bar"></div>
+            <span id="menu-desc-text"></span>
+        </div>
+    </div>
+
+    <!-- Information Panel -->
+    <div id="rageui-information" class="hidden">
+        <div id="info-header">Informations</div>
+        <div id="info-items"></div>
+    </div>
+
+    <div id="rageui-notifications"></div>
+
+    <!-- ID Card Container -->
+    <div id="rageui-idcard-container" class="hidden">
+        <div class="idcard">
+            <div class="idcard-header">
+                <div class="idcard-logo"><i class="fa-solid fa-building-columns"></i></div>
+                <div class="idcard-title">
+                    <h2>STATE OF SAN ANDREAS</h2>
+                    <h3>IDENTIFICATION CARD</h3>
+                </div>
+            </div>
+            <div class="idcard-body">
+                <div class="idcard-photo">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="idcard-details">
+                    <div class="detail-row">
+                        <span class="detail-label">LAST NAME</span>
+                        <span class="detail-value" id="idcard-lastname">DOE</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">FIRST NAME</span>
+                        <span class="detail-value" id="idcard-firstname">JOHN</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">DOB</span>
+                        <span class="detail-value" id="idcard-dob">01/01/1990</span>
+                    </div>
+                    <div class="detail-row split">
+                        <div class="split-col">
+                            <span class="detail-label">SEX</span>
+                            <span class="detail-value" id="idcard-sex">M</span>
+                        </div>
+                        <div class="split-col">
+                            <span class="detail-label">HEIGHT</span>
+                            <span class="detail-value" id="idcard-height">180 cm</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="idcard-footer">
+                <div class="idcard-signature" id="idcard-signature">John Doe</div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
