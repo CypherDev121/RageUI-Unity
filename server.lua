@@ -203,7 +203,7 @@ AddEventHandler('RageUI:RestartResource', function()
         style = "warning"
     })
     Citizen.Wait(500)
-    ExecuteCommand("restart rageui")
+    ExecuteCommand("restart " .. GetCurrentResourceName())
 end)
 
 

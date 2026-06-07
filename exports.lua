@@ -23,8 +23,8 @@ function UpdateMenu(menu)
     RageUI.UpdateMenu(menu)
 end
 
-function Notify(message, duration, style)
-    TriggerEvent('RageUI:Notify', message)
+function Notify(message, style, duration)
+    TriggerEvent('RageUI:Notify', message, style, duration)
 end
 
 -- Exports pour les items

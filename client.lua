@@ -24,8 +24,8 @@ AddEventHandler('RageUI:UpdateHTMLColors', function(colors)
 end)
 
 RegisterNetEvent('RageUI:Notify')
-AddEventHandler('RageUI:Notify', function(msg)
-    SendNUIMessage({ type = 'rageui:notify', text = msg or '', style = 'info', duration = 4000 })
+AddEventHandler('RageUI:Notify', function(msg, style, duration)
+    SendNUIMessage({ type = 'rageui:notify', text = msg or '', style = style or 'info', duration = duration or 4000 })
 end)
 
 RegisterNetEvent('RageUI:NotifySuccess')
